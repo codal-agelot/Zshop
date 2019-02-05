@@ -3,10 +3,12 @@ from .models import Cart,Order
 
 
 
+
+
 class CartSerializer(serializers.ModelSerializer):
 
     totalprice = serializers.ReadOnlyField(source='total_price')
-    price  = serializers.ReadOnlyField(source='pricee')
+    price  = serializers.ReadOnlyField(source='cart_price')
 
 
     class Meta:
@@ -31,7 +33,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id','cart_details','totalPrice']
+        fields = ['id','cart_details']
         # depth = 1
 
     def create(self, validated_data):

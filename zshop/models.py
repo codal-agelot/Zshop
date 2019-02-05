@@ -1,23 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
-
-class User(models.Model):
-
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+class User(AbstractBaseUser):
+    email = models.EmailField(('email address'), unique=True)
     street_address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zip = models.PositiveIntegerField(default=1)
     phone = models.CharField(max_length=10)
 
+    USERNAME_FIELD = 'email'
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = ('users')
+
 
 
 
 class Category(models.Model):
 
-    name = models.CharField(max_length=120, db_index=True)
+    name = models.CharField(max_length=120, db_index=True, unique=True)
 
 
     class Meta:

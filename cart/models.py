@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from zshop.models import User
 from django.db.models import Sum
 
 from zshop.models import Product
@@ -8,32 +8,25 @@ from zshop.models import Product
 
 class Cart(models.Model):
 
-    user = models.ForeignKey(User, related_name="carts",on_delete=models.CASCADE)
-    item  = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    item  = models.ManyToManyField(Product, through='Through_table')
     quantity = models.IntegerField(default=1)
 
 
-    @property
-    def total_price(self):
-        product_price = self.item.price * self.quantity
-        return product_price
 
+class Through_table(models.Model):
+    cart  = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product =  models.ForeignKey(Product, on_delete=models.CASCADE)
 
-    def pricee(self):
-        price = self.item.price
-        return price
 
 
 class Order(models.Model):
 
-    # cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    cart_details = models.ManyToManyField(Cart)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    @property
-    def total_cart_price(self):
-        total_price = Cart.item.objects.aggregate(Sum('price')).get('price__sum')
-        total_quantity = Cart.objects.aggregate(Sum('quantity')).get('quantity__sum')
 
-        total_price  = total_price*total_quantity
+class OrderLine(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.Model)
+    price = models.PositiveIntegerField()
 
-        return total_price
