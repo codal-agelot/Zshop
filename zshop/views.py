@@ -16,8 +16,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'available')
 
-class UserDetailsViewSet(viewsets.ModelViewSet):
-
-    queryset = models.User.objects.all()
-    serializer_class = serializers.UserDetailSerializer
+# class UserDetailsViewSet(viewsets.ModelViewSet):
+#
+#     queryset = models.User.objects.all()
+#     serializer_class = serializers.UserDetailSerializer
 

@@ -1,32 +1,24 @@
 from django.db import models
-from zshop.models import User
-from django.db.models import Sum
+from django.contrib.auth.models import User
+
 
 from zshop.models import Product
 
 
 
 class Cart(models.Model):
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    item  = models.ManyToManyField(Product, through='Through_table')
+    # user = models.OneToOneField(User,on_delete=models.CASCADE)
+    item  = models.OneToOneField(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
 
+    def totalCost(self):
+        price = Product.objects.values_list('price').filter(name = self.item.name)
+        price = [int(i[0]) for i in price]
+        price = price[0]
+        quantity = self.quantity
+        totalcost = price * quantity
 
-class Through_table(models.Model):
-    cart  = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product =  models.ForeignKey(Product, on_delete=models.CASCADE)
+        return totalcost
 
-
-
-class Order(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-class OrderLine(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.Model)
-    price = models.PositiveIntegerField()
 

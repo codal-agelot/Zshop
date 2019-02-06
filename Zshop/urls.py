@@ -24,9 +24,9 @@ schema_view = get_swagger_view(title='Zshop API')
 urlpatterns = [
     path("", schema_view),
     path('admin/', admin.site.urls),
-    path('api/', include('zshop.urls')),
+    path('category_product/', include('zshop.urls')),
     path('cart_api/', include('cart.urls')),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', obtain_auth_token),
+    path('auth_api/', include('Auth.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
