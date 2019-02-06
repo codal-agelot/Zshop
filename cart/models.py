@@ -22,3 +22,5 @@ class Cart(models.Model):
         return totalcost
 
 
+class Order(models.Model):
+    cart = models.OneToOneField(Cart, on_delete=models.CASCADE)

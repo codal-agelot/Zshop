@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'Auth.CustomUser'
+# AUTH_USER_MODEL = 'Auth.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_framework.authtoken',
     'rest_auth',
-    'Auth.apps.AuthConfig',
     'allauth',
     'allauth.account',
     'rest_auth.registration',
@@ -65,11 +64,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Zshop.urls'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # <-- And here
-    ],
-}
 
 
 TEMPLATES = [
