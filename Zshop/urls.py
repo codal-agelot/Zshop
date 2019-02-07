@@ -16,16 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework_swagger.views import get_swagger_view
-
+from zshop import views
 schema_view = get_swagger_view(title='Zshop API')
 
 
 urlpatterns = [
     path("", schema_view),
     path('admin/', admin.site.urls),
+    path('users/', views.CustomUserViewSet.as_view()),
     path('category_product/', include('zshop.urls')),
     path('cart_api/', include('cart.urls')),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/registration/', include('rest_auth.registration.urls')),
 ]
 

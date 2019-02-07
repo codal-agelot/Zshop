@@ -1,7 +1,7 @@
 from zshop import models
 from zshop import serializers
 from rest_framework import viewsets, filters
-
+from rest_framework import generics
 
 class CatergoryViewSet(viewsets.ModelViewSet):
 
@@ -16,8 +16,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'available')
 
-# class UserDetailsViewSet(viewsets.ModelViewSet):
-#
-#     queryset = models.User.objects.all()
-#     serializer_class = serializers.UserDetailSerializer
 
+class CustomUserViewSet(generics.ListCreateAPIView):
+    queryset = models.CustomUser.objects.all()
+    serializer_class = serializers.CustomUserSerializer

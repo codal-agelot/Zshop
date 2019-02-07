@@ -8,11 +8,16 @@ class CartViewSet(viewsets.ModelViewSet):
     serializer_class = CartSerializer
     queryset = Cart.objects.all()
 
-    #
-    # def get_queryset(self,):
-    #     user = self.request.user
-    #     return Cart.objects.filter(user=user)
-    #
+
+
+# class CartPriceViewSet(viewsets.ModelViewSet):
+#     model = Cart
+#     serializer_class = CartPriceSerializer
+#
+#     def get_queryset(self,):
+#         user = self.request.
+#         return Cart.objects.filter(user=user)
+
     # def pre_save(self, obj):
     #     obj.user = self.request.user
 

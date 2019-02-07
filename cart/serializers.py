@@ -12,6 +12,12 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ('item','quantity', 'totalCost')
 
 
+
+# class CartPriceSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Cart
+#         fields = ('totalsum')
+
     # def create(self, validated_data):
     #     guest, created = Cart.objects.get_or_create(
     #         user = validated_data['user'],
